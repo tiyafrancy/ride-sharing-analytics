@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ride Share Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+</head>
+
+<body>
+  <div class="side-panel">
+    <h3>March 2025</h3> 
+    <div id="calendar" class="calendar">
+    <!-- Calendar will be populated by JavaScript -->
+    </div>
+
+    <div class="dropdown-container">
+      <select id="rideSelect" class="ride-select">
+        <option value="HV0003">Uber</option>
+        <option value="HV0005">Lyft</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="main-header">
+    <h1 class="display-5 fw-bold m-0">Ride Share Analytics</h1>
+  </div>
+
+  <!-- TOP 3 KPIs inside the container, with consistent spacing/width -->
+  <div class="container">
+    <div class="d-flex gap-3 mb-4">
+      <div class="col-md-4">
+        <div id="totalSalesBox" class="kpi-box">
+          <h3>Total Fare</h3>
+          <p id="salesAmount" class="kpi-value">$0.00</p>
+          <p id="salesChange" class="kpi-change up"></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div id="numberSalesBOX" class="kpi-box">
+          <h3>Number Of Services</h3>
+          <p id="numberSales" class="kpi-value">0</p>
+          <p id="numSalesChange" class="kpi-change down"></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div id="averagesalesBox" class="kpi-box">
+          <h3>Average Sale Value</h3>
+          <p id="averageSales" class="kpi-value">$0.00</p>
+          <p id="avgSalesChange" class="kpi-change none"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <canvas id="myChart"></canvas> -->
+  <canvas id="myChart" width="400" height="200"></canvas>
+
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.9.0.min.js"></script>
+  <script src="/static/js/script.js"></script>
+</body>
+</html>
+

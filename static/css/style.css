@@ -1,1 +1,124 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; 
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to top right, #7c89d5, #f599a5);
+    font-size: 12px;
+  }
+  
+  .side-panel {
+    width: 250px; /* Width of the side panel */
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Fix the side panel to the left */
+    height: 100%; /* Full height */
+}
 
+.main-header {
+    flex-direction: column;
+    height: 200px; /* Fixed height for the heading */
+    /* max-height: 15vh; Maximum height relative to viewport height */
+    overflow: hidden; /* Hide overflow if content exceeds height */
+    display: flex; /*Use flexbox for alignment */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    background-color: transparent; 
+    color: white; /* Text color */
+    padding: 10px; /* Padding for inner content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for aesthetics */
+
+}
+
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
+    gap: 5px; /* Space between days */
+    margin-top: 10px; /* Space above the calendar */
+}
+
+.header-row {
+    display: contents; /* Allows the header to align with the grid */
+    font-weight: bold;
+    text-align: center;
+}
+
+.calendar-header {
+    padding: 10px;
+    background-color: #f0f0f0; /* Light background for header */
+    border: 1px solid #ccc; /* Border for header */
+}
+
+.calendar-cell {
+    padding: 5px; /* Space inside each day */
+    background-color: #ffffff; /* White background for days */
+    border: 1px solid #ccc; /* Border for days */
+    text-align: center; /* Center text */
+    min-height: 10px; /* Minimum height for each day */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.calendar-cell.empty {
+    background-color: transparent; /* Make empty cells transparent */
+}
+
+.main-content {
+    margin-left: 250px; /* Leave space for the side panel */
+    flex: 1; /* Take the remaining space */
+    display: flex;
+    flex-direction: column;
+}
+
+/* .header-container {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+} */
+
+  .ride-select {
+    background-color: #eccde7;
+    border-radius: 2rem;
+    font-size: 1rem;
+    padding: 0.1rem 0.75rem;
+    width: 200px;
+  }
+  .dropdown-container {
+    margin-top: 100px; /* Add some space above the dropdown */
+ 
+}
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: center;
+  }
+  /* new */
+  .kpi-box{
+    flex: 1;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    transition: transform 0.2s ease-in-out;
+  }
+/* General styling for the canvas */
+#myChart {
+    border: 1px solid #ccc; /* Add a light gray border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+    margin: 20px 0; /* Add some margin above and below the canvas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Optional: Responsive styling */
+@media (max-width: 768px) {
+    #myChart {
+        width: 100%; /* Make the canvas full width on smaller screens */
+        height: auto; /* Maintain aspect ratio */
+    }
+}
