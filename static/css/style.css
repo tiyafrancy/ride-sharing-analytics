@@ -1,124 +1,398 @@
+/* --- Base Styles & Typography --- */
 body {
     margin: 0;
     padding: 0;
-    height: 100vh; 
+    min-height: 100vh;
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to top right, #7c89d5, #f599a5);
-    font-size: 12px;
-  }
-  
-  .side-panel {
-    width: 250px; /* Width of the side panel */
-    background-color: #f4f4f4;
+    background-color: #e0f2f1; /* Very Light Teal/Green background */
+    color: #212121; /* Dark Black/Grey text for contrast */
+    font-size: 16px;
+    overflow-x: hidden; /* Prevent horizontal scroll on small screens */
+}
+
+/* --- Main Dashboard Container (Flexbox for overall layout) --- */
+.main-dashboard-container {
+    display: flex;
+    flex-direction: column; /* Stack vertically on small screens (mobile-first) */
+    min-height: 100vh;
+    padding: 10px; /* Overall padding for the dashboard */
+    gap: 15px; /* Gap between sections on mobile */
+}
+
+/* Global Filters Sidebar (left column on desktop) */
+.global-filters-sidebar {
+    background-color: #ffffff;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    position: fixed; /* Fix the side panel to the left */
-    height: 100%; /* Full height */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column; /* Stack filter panels vertically */
+    gap: 20px; /* Gap between filter panels */
+    flex-shrink: 0; /* Prevent sidebar from shrinking on desktop */
+    width: 100%; /* Full width on mobile */
+    order: 0; /* Default order for mobile (first in column) */
 }
 
-.main-header {
-    flex-direction: column;
-    height: 200px; /* Fixed height for the heading */
-    /* max-height: 15vh; Maximum height relative to viewport height */
-    overflow: hidden; /* Hide overflow if content exceeds height */
-    display: flex; /*Use flexbox for alignment */
-    align-items: center; /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
-    background-color: transparent; 
-    color: white; /* Text color */
-    padding: 10px; /* Padding for inner content */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for aesthetics */
-
+.global-filters-sidebar .panel-title {
+    font-size: 1.4rem; /* Slightly smaller for sidebar titles */
+    color: #00796b; /* Darker Teal Green */
+    margin-bottom: 10px;
 }
 
-  .calendar {
+/* Styles for individual filter panels within the sidebar */
+.calendar-panel,
+.ride-selection-panel,
+.weather-condition-panel {
+    padding: 15px; /* Consistent padding for filter panels */
+    border-radius: 8px;
+    background-color: #f5f5f5; /* Very light grey */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Container for Daily and Weather Analytics sections (stacked vertically) */
+.analytics-sections-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack daily and weather sections vertically */
+    flex: 1; /* Allows this wrapper to take remaining horizontal space */
+    gap: 15px; /* Gap between daily and weather sections */
+}
+
+/* Styles for the two main content sections (Daily and Weather Analytics) */
+.dashboard-section {
+    flex: 1; /* Allows sections to grow and take equal space within their wrapper */
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column; /* Main content and charts stack within their section */
+}
+
+/* Specific order for mobile (Daily, then Weather) */
+.daily-rides-section {
+    order: 1; 
+}
+.weather-impact-section {
+    order: 2;
+}
+
+/* --- Calendar Specifics --- */
+.calendar {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
-    gap: 5px; /* Space between days */
-    margin-top: 10px; /* Space above the calendar */
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    font-size: 0.9rem;
+    text-align: center;
 }
 
 .header-row {
-    display: contents; /* Allows the header to align with the grid */
+    display: contents; /* Makes children part of the grid layout */
     font-weight: bold;
-    text-align: center;
-}
-
-.calendar-header {
-    padding: 10px;
-    background-color: #f0f0f0; /* Light background for header */
-    border: 1px solid #ccc; /* Border for header */
+    color: #424242;
+    padding-bottom: 5px;
 }
 
 .calendar-cell {
-    padding: 5px; /* Space inside each day */
-    background-color: #ffffff; /* White background for days */
-    border: 1px solid #ccc; /* Border for days */
-    text-align: center; /* Center text */
-    min-height: 10px; /* Minimum height for each day */
-    cursor: pointer; /* Change cursor to pointer on hover */
+    padding: 6px 4px;
+    background-color: #e0e0e0;
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    color: #212121;
+}
+
+.calendar-cell:hover:not(.empty):not(.selected) {
+    background-color: #c8e6c9;
+    border-color: #a5d6a7;
+    transform: translateY(-2px);
 }
 
 .calendar-cell.empty {
-    background-color: transparent; /* Make empty cells transparent */
+    background-color: transparent;
+    border: none;
+    cursor: default;
 }
 
+.calendar-cell.selected {
+    background-color: #009688;
+    color: #ffffff;
+    font-weight: bold;
+    border-color: #4db6ac;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Dropdown --- */
+.ride-select { /* Used for both ride and weather dropdowns */
+    background-color: #ffffff; /* Changed to white to match main dashboard sections */
+    border-radius: 8px;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    width: 100%;
+    border: 1px solid #009688; /* Darker teal border for emphasis */
+    color: #212121;
+    appearance: none;
+    /* Using a teal arrow for consistency */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%23009688' d='M2.2 2.7L4 4.5L5.8 2.7L6.5 3.4L4 5.9L1.5 3.4L2.2 2.7Z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 0.7rem;
+}
+
+/* --- Main Content Header --- */
 .main-content {
-    margin-left: 250px; /* Leave space for the side panel */
-    flex: 1; /* Take the remaining space */
+    flex-grow: 1; /* Allows main content to take remaining space within its section */
+    padding: 15px; /* Consistent padding for main content areas */
+}
+
+.main-header {
+    background-color: #ffffff; /* White for header */
+    color: #212121; /* Black text */
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Lighter shadow */
+    margin-bottom: 12px;
+    border-radius: 8px; /* Consistent border radius */
+}
+
+.main-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem !important;
+    color: #009688; /* Teal Green heading */
+}
+
+.main-header .lead {
+    font-size: 0.75rem;
+    opacity: 1;
+    color: #424242;
+}
+
+/* --- KPI Section (2x2 Grid) --- */
+.kpi-section .row {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+    justify-content: space-between; /* Distribute items with space between them */
+}
+
+.kpi-box {
+    background-color: #ffffff;
+    padding: 0.7rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
     display: flex;
     flex-direction: column;
-}
-
-/* .header-container {
-    background-color: #007bff;
-    color: white;
-    padding: 20px;
-} */
-
-  .ride-select {
-    background-color: #eccde7;
-    border-radius: 2rem;
-    font-size: 1rem;
-    padding: 0.1rem 0.75rem;
-    width: 200px;
-  }
-  .dropdown-container {
-    margin-top: 100px; /* Add some space above the dropdown */
- 
-}
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
     justify-content: center;
-  }
-  /* new */
-  .kpi-box{
-    flex: 1;
+    align-items: center;
+    color: #212121;
+}
+
+.kpi-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.kpi-box h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #424242;
+    margin-bottom: 0.2rem;
+}
+
+.kpi-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #009688;
+    margin-bottom: 0;
+}
+
+/* Custom column classes for KPIs */
+.col-6-mobile {
+    width: calc(50% - 7.5px); /* 2 columns on mobile, considering a 15px gap (g-3 = 0.5rem = 8px * 2 = 16px / 2 = 8px)*/
+    margin-bottom: 15px; /* Adds space between rows on mobile */
+}
+
+/* --- Chart Section --- */
+.chart-section {
     background-color: #ffffff;
-    padding: 1.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-top: 15px;
+    display: flex; /* Charts now use flex for better arrangement */
+    flex-direction: column; /* Stack charts on small screens by default */
+    gap: 15px; /* Gap between charts */
+}
+
+.chart-container {
+    position: relative;
+    height: 250px; /* Increased height for better chart fit */
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Ensure canvas element fills its chart container */
+.chart-container canvas {
+    display: block;
     width: 100%;
     height: 100%;
-    max-width: 100%;
-    transition: transform 0.2s ease-in-out;
-  }
-/* General styling for the canvas */
-#myChart {
-    border: 1px solid #ccc; /* Add a light gray border */
-    border-radius: 5px; /* Rounded corners */
-    background-color: #f9f9f9; /* Light background color */
-    margin: 20px 0; /* Add some margin above and below the canvas */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-/* Optional: Responsive styling */
-@media (max-width: 768px) {
-    #myChart {
-        width: 100%; /* Make the canvas full width on smaller screens */
-        height: auto; /* Maintain aspect ratio */
+.pie-chart-container {
+    height: 250px; /* Increased height for consistent chart container sizing */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.pie-chart-container canvas {
+    max-width: 95%;
+    max-height: 95%;
+}
+
+/* --- Responsive Adjustments (Media Queries) --- */
+@media (min-width: 768px) { /* Medium devices (Tablets) */
+    .main-dashboard-container {
+        flex-direction: column; /* Still stacked on tablets, but giving more width to content */
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .global-filters-sidebar {
+        width: 100%; /* Take full width for filter panels on tablets */
+        flex-direction: row; /* Layout filter panels side-by-side in a row */
+        justify-content: space-around; /* Distribute space evenly */
+        order: 0; /* Stay at the top */
+    }
+
+    .calendar-panel,
+    .ride-selection-panel,
+    .weather-condition-panel {
+        flex: 1; /* Allow panels to grow */
+        max-width: 300px; /* Limit individual panel width */
+    }
+
+    /* Analytics sections stack below the filters */
+    .daily-rides-section,
+    .weather-impact-section {
+        width: 100%; /* Take full width below the filters */
+        min-width: unset; /* Remove min-width constraint */
+        order: unset; /* Reset order to default flow */
+    }
+
+    .main-header {
+        text-align: left;
+        padding: 20px 25px;
+        margin-bottom: 15px;
+    }
+
+    .kpi-section {
+        padding: 0 25px;
+    }
+
+    /* Tablet KPI layout: 2 per row */
+    .kpi-section .col-6-mobile {
+        width: calc(50% - 7.5px); /* Maintain 2 columns */
+    }
+
+    .chart-section {
+        margin: 20px 25px;
+        flex-direction: column; /* Charts remain stacked on tablets */
+    }
+}
+
+@media (min-width: 992px) { /* Large devices (Desktops) */
+    .main-dashboard-container {
+        flex-direction: row; /* Two columns on larger desktops: sidebar on left, analytics on right */
+        align-items: flex-start; /* Align content to the top */
+        gap: 20px; /* Gap between columns */
+        padding: 20px;
+    }
+
+    .global-filters-sidebar {
+        width: 300px; /* Fixed width for the left sidebar */
+        flex-direction: column; /* Stack panels vertically */
+        order: 0; /* Place sidebar first (left) */
+    }
+
+    .calendar-panel,
+    .ride-selection-panel,
+    .weather-condition-panel {
+        max-width: none; /* Remove max-width constraint for panels inside the sidebar */
+    }
+
+    .analytics-sections-wrapper {
+        flex: 1; /* Take remaining horizontal space */
+        flex-direction: column; /* Stack daily and weather sections vertically */
+        gap: 20px; /* Gap between daily and weather analytics sections */
+    }
+
+    .daily-rides-section {
+        order: 0; /* Place daily section on top within its wrapper */
+        flex: unset; /* Remove flex:1 to let content determine height */
+        height: auto;
+    }
+    
+    .weather-impact-section {
+        order: 1; /* Place weather section on bottom within its wrapper */
+        flex: unset; /* Remove flex:1 to let content determine height */
+        height: auto;
+    }
+
+    .main-header h1 {
+        font-size: 1.7rem;
+    }
+
+    .kpi-box {
+        padding: 0.8rem;
+    }
+
+    .kpi-box h3 {
+        font-size: 1rem;
+    }
+
+    .kpi-value {
+        font-size: 1.8rem;
+    }
+
+    /* Desktop KPI layout: 4 per row */
+    .kpi-section .col-3 {
+        width: calc(25% - 15px); /* 4 columns, considering a 15px gap (g-3 = 0.5rem = 8px * 2 = 16px / 2 = 8px)*/
+        margin-bottom: 15px; /* Add margin-bottom for spacing between rows */
+        flex-grow: 0; /* Prevent stretching */
+    }
+
+    .chart-section {
+        flex-direction: row; /* Charts next to each other on desktop */
+        gap: 15px; /* Gap between charts */
+        justify-content: center; /* Center the charts within the section */
+        align-items: center; /* Align items vertically in the center */
+    }
+    .chart-container,
+    .pie-chart-container {
+        flex: 1 1 45%; /* Allow growing/shrinking, with a preferred basis of 45% */
+        max-width: 48%; /* Ensure they don't grow too wide, leaving space for gap */
+        height: 250px; /* Keep height consistent */
+    }
+}
+
+@media (min-width: 1200px) { /* Extra large devices */
+    .main-dashboard-container {
+        gap: 30px; /* More space between columns */
+    }
+    .global-filters-sidebar {
+        width: 320px; /* Even wider left sidebar */
+    }
+    .analytics-sections-wrapper {
+        gap: 30px; /* More space between daily and weather sections */
+    }
+    .kpi-section .col-3 {
+        width: calc(25% - 22.5px); /* Adjust for larger gap (30px / 4 = 7.5px * 3 = 22.5px for gutters) */
     }
 }
