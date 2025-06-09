@@ -95,14 +95,14 @@ Platform Choice: A dynamic approach, considering real-time conditions, can enhan
      
 8. Limitations and Future Development
      
-- Current Limitations
+> Current Limitations
 * Data Scope: The current analysis is limited to sample data for March 2025 and specifically focuses on Uber (HV0003) and Lyft (HV0005) in New York City. This limits the generalizability of findings to other periods, cities, or ride-sharing services.
 * Weather Data Granularity: While weather data is integrated, its impact is aggregated. More granular weather effects (e.g., specific wind speeds, microclimates within NYC) or combining multiple weather factors could offer deeper insights.
 * Feature Engineering: The existing features primarily revolve around basic trip metrics and weather. Driver-specific factors (e.g., driver ratings, vehicle type, driving hours), real-time traffic conditions, or event-based demand surges are not yet fully incorporated.
 * UI/UX Sophistication: While functional, the dashboard's user interface and experience could be enhanced with more interactive visualizations, custom map integrations, and a more polished design.
 * Business Context & External Factors: The analysis doesn't currently account for external factors like major city events (concerts, parades), public transport disruptions, or competitor pricing strategies, all of which influence ride-share demand and pricing.
       
-- Future Development
+> Future Development
 Based on these limitations, here are several avenues for future development:
 
 * Expand Data Coverage: Integrate larger datasets spanning multiple years and diverse geographic locations to make the insights more broadly applicable. Also, consider incorporating data from public transport for a holistic urban mobility view.
