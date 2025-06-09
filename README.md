@@ -17,13 +17,15 @@ This project is a comprehensive analysis of ride-sharing data, focusing on drive
 * Weather Data Integration: Combines ride data with weather information from Meteostat.
       
 3. Project Structure
+```text
 ride-sharing-analytics/
-├── main_database/
-│   └── fhvhv_tripdata_2025-03.parquet
-├── results/
-│       ├── ride_data.csv
-│       ├── ride_data_with_weather_condition.csv
-│       └── ride_share.db
+├── ride_share.ipynb
+├── deep_learning_implementation.ipynb
+├── data_analysis.ipynb
+├── .gitignore
+├── README.md
+└── requirements.txt
+│
 ├── images/
 │   ├── dashboard/
 │       ├── daily_ride_analytics.png
@@ -33,13 +35,22 @@ ride-sharing-analytics/
 │   ├── daily_avg_driver_tips.png
 │   ├── avg_driver_pay_weather.png
 │   └── avg_driver_tips_weather.png
-│        
-│   
+│
+├── main_database/
+│   └── fhvhv_tripdata_2025-03.parquet
+│
 ├── ML_artifacts/
 │   ├── ride_share_model.h5
 │   └── model_optimization_results.csv
-│   └── ride_share_dashboard/
+│
+├── results/
+│       ├── ride_data.csv
+│       ├── ride_data_with_weather_condition.csv
+│       └── ride_share.db       
+│   
+├── ride_share_dashboard/
 │       ├── app.py
+│       ├── ride_share.db
 │       ├── templates/
 │       │   └── index.html
 │       └── static/
@@ -47,12 +58,8 @@ ride-sharing-analytics/
 │               └── style.css
 │           └── js/
 │               └── script.js
-├── ride_share.ipynb
-├── deep_learning_implementation.ipynb
-├── data_analysis.ipynb
-├── .gitignore
-├── README.md
-└── requirements.txt
+```
+
 5. Technologies Used
 Backend: Flask (Python web framework), SQLite, Python.
 Frontend: HTML5, CSS3, JavaScript, Chart.js.
