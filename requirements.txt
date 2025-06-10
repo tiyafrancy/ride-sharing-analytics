@@ -1,0 +1,8 @@
+Flask
+pandas
+sqlalchemy
+scikit-learn
+tensorflow
+keras-tuner
+meteostat
+matplotlib
